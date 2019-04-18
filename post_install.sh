@@ -2,7 +2,7 @@
 
 # Enable service
 
-sysrc -f /etc/rc.conf postgresql_enable="YES"
+sysrc postgresql_enable="YES"
 
 # Initialize database
 service postgresql start
@@ -13,4 +13,4 @@ service postgresql initdb
 
 # sed -i '' "s/127.0.0.1\/32/$SUBNET\/24/g" /var/db/postgres/data96/pg_hba.conf
 
-service postgresql restart
+# service postgresql restart
