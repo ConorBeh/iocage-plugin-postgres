@@ -7,7 +7,7 @@ sysrc postgresql_enable="YES"
 # Initialize database
 service postgresql start
 sleep 5
-service postgresql initdb
+# service postgresql initdb
 
 # Allow access from specified subnet
 
