@@ -2,7 +2,7 @@
     "name": "Postgres",
     "plugin_schema": "2",
     "release": "12.2-RELEASE",
-    "artifact": "https://github.com/ConorBeh/iocage-plugin-gitea.git",
+    "artifact": "https://github.com/ConorBeh/iocage-plugin-postgres.git",
     "pkgs": [
         "postgresql11-server",
         "postgresql11-contrib"
