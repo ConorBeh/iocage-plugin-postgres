@@ -10,8 +10,8 @@ service postgresql start 2>/dev/null
 sleep 5
 
 # Assign variables
-USER="pgsql"
-DB="pgsql"
+USER="pguser"
+DB="postgresdb"
 
 # Save the config values
 echo "$DB" > /root/dbname
@@ -64,8 +64,8 @@ echo "DATABASE INFORMATION"
 echo "-------------------------------------------------------"
 echo "Host: ${IP}" 
 echo "Database Type: PostgreSQL" 
-echo "Database Name: $DB" 
+echo "First Database Name: $DB" 
 echo "Database User: $USER" 
-echo "Database Password: $PASS" 
+echo "Database User Password: $PASS" 
 echo "The password is randomly generated"
 echo "To review this information again click Post Install Notes"
