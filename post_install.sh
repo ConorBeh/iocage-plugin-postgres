@@ -17,8 +17,13 @@ DB="postgresdb"
 echo "$DB" > /root/dbname
 echo "$USER" > /root/dbuser
 export LC_ALL=C
+# Generate password
 cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1 > /root/dbpassword
 PASS=`cat /root/dbpassword`
+# Generate superuser password
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1 > /root/superdbpassword
+SUPERPASS=`cat /root/superdbpassword`
+
 
 # create user
 psql -d template1 -U postgres -c "CREATE USER ${USER} CREATEDB SUPERUSER;" 2>/dev/null
@@ -33,7 +38,7 @@ psql -d template1 -U postgres -c "ALTER USER ${USER} WITH PASSWORD '${PASS}';" 2
 psql -U postgres -d ${DB} -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;" 2>/dev/null
 
 # Edit superuser password
-psql -d template1 -U postgres -c "ALTER USER postgres WITH PASSWORD '${PASS}';" 2>/dev/null
+psql -d template1 -U postgres -c "ALTER USER postgres WITH PASSWORD '${SUPERPASS}';" 2>/dev/null
 
 
 # Fix permission for postgres 
@@ -68,8 +73,15 @@ echo "DATABASE INFORMATION"
 echo "-------------------------------------------------------"
 echo "Host: ${IP}" 
 echo "Database Type: PostgreSQL" 
-echo "Database Name: $DB" 
-echo "Database User: $USER" 
-echo "Database Password: $PASS" 
-echo "The password is randomly generated"
+echo "Default Database Name: $DB" 
+echo "Default Database User: $USER" 
+echo "Default Database Password: $PASS"
+echo "Superuser Username: postgres"
+echo "Superuser Password: $SUPERPASS"
+echo "-------------------------------------------------------"
+echo "Other Info"
+echo "-------------------------------------------------------"
+echo "Read below if you are using Davinci Resolve"
+echo "Use Superuser credentials and a different database name than default for DaVinci Resolve"
+echo "These password are randomly generated during install, review Postgres docs to change them"
 echo "To review this information again click Post Install Notes"
