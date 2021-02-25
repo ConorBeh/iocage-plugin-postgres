@@ -12,20 +12,13 @@ sleep 5
 # Assign variables
 USER="pguser"
 DB="postgresdb"
-SUPERUSER="pgsuper"
 
 # Save the config values
 echo "$DB" > /root/dbname
 echo "$USER" > /root/dbuser
-echo "$SUPERUSER" > /root/dbsuperuser
 export LC_ALL=C
-# Normal user
 cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1 > /root/dbpassword
 PASS=`cat /root/dbpassword`
-
-# Superuser
-cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 16 | head -n 1 > /root/superdbpassword
-SUPERPASS=`cat /root/superdbpassword`
 
 # create user
 psql -d template1 -U postgres -c "CREATE USER ${USER} CREATEDB SUPERUSER;" 2>/dev/null
@@ -35,11 +28,6 @@ psql -d template1 -U postgres -c "CREATE DATABASE ${DB} OWNER ${USER};" 2>/dev/n
 
 # Set a password on the postgres account
 psql -d template1 -U postgres -c "ALTER USER ${USER} WITH PASSWORD '${PASS}';" 2>/dev/null
-
-# Create new superuser user
-psql -d template1 -U postgres -c "CREATE USER ${SUPERUSER};" 2>/dev/null
-psql -d template1 -U postgres -c "ALTER USER ${SUPERUSER} WITH PASSWORD '${SUPERPASS}';" 2>/dev/null
-psql -d template1 -U postgres -c "ALTER USER ${SUPERUSER} WITH SUPERUSER;" 2>/dev/null
 
 # Connect as superuser and enable pg_trgm extension
 psql -U postgres -d ${DB} -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;" 2>/dev/null
@@ -57,9 +45,7 @@ echo "Host: localhost or 127.0.0.1" > /root/PLUGIN_INFO
 echo "Database Type: PostgresSQL" >> /root/PLUGIN_INFO
 echo "Database Name: $DB" >> /root/PLUGIN_INFO
 echo "Database User: $USER" >> /root/PLUGIN_INFO
-echo "Database User Password: $PASS" >> /root/PLUGIN_INFO
-echo "Databaser Super Username: $SUPERUSER" >> /root/PLUGIN_INFO
-echo "Database Super User: $SUPERPASS" >> /root/PLUGIN_INFO
+echo "Database Password: $PASS" >> /root/PLUGIN_INFO
 
 # Thank you Asigra plugin for your service on this hack
 echo "Figure out our Network IP"
@@ -78,11 +64,8 @@ echo "DATABASE INFORMATION"
 echo "-------------------------------------------------------"
 echo "Host: ${IP}" 
 echo "Database Type: PostgreSQL" 
-echo "First Database Name: $DB" 
+echo "Database Name: $DB" 
 echo "Database User: $USER" 
-echo "Database User Password: $PASS" 
-echo "Databaser Super Username: $SUPERUSER"
-echo "Database Super User Password: $SUPERPASS"
-echo "If you are using Davinci Resolve, you need to use the superuser"
-echo "These passwords are randomly generated"
+echo "Database Password: $PASS" 
+echo "The password is randomly generated"
 echo "To review this information again click Post Install Notes"
