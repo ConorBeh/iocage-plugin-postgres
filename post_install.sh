@@ -10,8 +10,8 @@ service postgresql start 2>/dev/null
 sleep 5
 
 # Assign variables
-USER="postgresdb"
-DB="postgresdb"
+USER="pgsql"
+DB="pgsql"
 
 # Save the config values
 echo "$DB" > /root/dbname
