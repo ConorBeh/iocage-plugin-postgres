@@ -10,7 +10,7 @@ service postgresql start 2>/dev/null
 sleep 5
 
 # Assign variables
-USER="pguser"
+USER="postgresdb"
 DB="postgresdb"
 
 # Save the config values
