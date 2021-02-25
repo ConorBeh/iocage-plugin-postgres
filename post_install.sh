@@ -32,6 +32,10 @@ psql -d template1 -U postgres -c "ALTER USER ${USER} WITH PASSWORD '${PASS}';" 2
 # Connect as superuser and enable pg_trgm extension
 psql -U postgres -d ${DB} -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;" 2>/dev/null
 
+# Edit superuser password
+psql -d template1 -U postgres -c "ALTER USER postgres WITH PASSWORD '${PASS}';" 2>/dev/null
+
+
 # Fix permission for postgres 
 echo "listen_addresses = '*'" >> /var/db/postgres/data11/postgresql.conf 2>/dev/null
 echo "host  all  all 0.0.0.0/0 md5" >> /var/db/postgres/data11/pg_hba.conf 2>/dev/null
