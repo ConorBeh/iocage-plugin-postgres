@@ -37,7 +37,7 @@ psql -d template1 -U postgres -c "CREATE DATABASE ${DB} OWNER ${USER};" 2>/dev/n
 psql -d template1 -U postgres -c "ALTER USER ${USER} WITH PASSWORD '${PASS}';" 2>/dev/null
 
 # Create new superuser user
-psql -d template1 -U postgres -c "CREATE ROLE ${SUPERUSER} LOGIN SUPERUSER PASSWORD 'passwordstring';
+psql -d template1 -U postgres -c "CREATE ROLE ${SUPERUSER} LOGIN SUPERUSER PASSWORD '${SUPERPASS}';
 
 # Connect as superuser and enable pg_trgm extension
 psql -U postgres -d ${DB} -c "CREATE EXTENSION IF NOT EXISTS pg_trgm;" 2>/dev/null
