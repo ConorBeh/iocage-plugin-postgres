@@ -1,11 +1,11 @@
 {
-    "name": "PostgreSQL Server 11",
+    "name": "Postgres",
     "plugin_schema": "2",
     "release": "12.2-RELEASE",
-    "artifact": "https://github.com/ConorBeh/iocage-plugin-postgres.git",
+    "artifact": "https://github.com/ConorBeh/iocage-plugin-gitea.git",
     "pkgs": [
         "postgresql11-server",
-        "postgresql11-contrib",
+        "postgresql11-contrib"
     ],
     "properties": {
         "dhcp": 1
