@@ -50,11 +50,12 @@ service postgresql restart 2>/dev/null
 sleep 5
 
 # Save database information
-echo "Host: localhost or 127.0.0.1" > /root/PLUGIN_INFO
 echo "Database Type: PostgresSQL" >> /root/PLUGIN_INFO
 echo "Database Name: $DB" >> /root/PLUGIN_INFO
 echo "Database User: $USER" >> /root/PLUGIN_INFO
 echo "Database Password: $PASS" >> /root/PLUGIN_INFO
+echo "Superuser Username: postgres" >> /root/PLUGIN_INFO
+echo "Superuser Password: $SUPERPASS" >> /root/PLUGIN_INFO
 
 # Thank you Asigra plugin for your service on this hack
 echo "Figure out our Network IP"
